@@ -1,0 +1,13 @@
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            # Pattern of log message for console appender
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n</Pattern>
+        </layout>
+    </appender>
+
+<!--Set log level to DEBUG, TRACE, WARN or whatever is needed here-->
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+    </root>
+</configuration>
