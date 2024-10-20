@@ -3,6 +3,8 @@ package utils;
 import org.testng.Assert;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class PropertiesUtils extends LoggerUtils {
@@ -63,6 +65,7 @@ public class PropertiesUtils extends LoggerUtils {
 
     /**
      * Returns the value of main application URL based on the `environment` specified in the common.properties file.
+     *
      * @return String application URL
      */
 
@@ -81,7 +84,8 @@ public class PropertiesUtils extends LoggerUtils {
             case "prod" -> {
                 return properties.getProperty("prodBaseUrl");
             }
-            default -> Assert.fail("Invalid environment " + sEnvironment + ", cannot get the application URL property!");
+            default ->
+                    Assert.fail("Invalid environment " + sEnvironment + ", cannot get the application URL property!");
         }
         return null;
     }
@@ -89,6 +93,7 @@ public class PropertiesUtils extends LoggerUtils {
 
     /**
      * Returns the value of backend URL based on the `environment` specified in the common.properties file.
+     *
      * @return String backend URL
      */
 
@@ -114,9 +119,12 @@ public class PropertiesUtils extends LoggerUtils {
 
     /**
      * Returns the value of database URL based on the `environment` specified in the common.properties file.
+     *
      * @return String database URL
+     * @deprecated There is a more concise method (getDatabaseParameters) that retrieves all database parameters based on requested environment.
      */
 
+    @Deprecated
     public static String getDatabaseUrl() {
         String sEnvironment = getEnvironment();
         switch (sEnvironment) {
@@ -151,6 +159,7 @@ public class PropertiesUtils extends LoggerUtils {
 
     /**
      * Returns values of any boolean property from the common.properties file, and converts in to actual Boolean value.
+     *
      * @param sProperty the name of the property whose value is returned
      * @return Boolean value of the property
      */
@@ -161,5 +170,40 @@ public class PropertiesUtils extends LoggerUtils {
             Assert.fail("Unknown value for '" + sProperty + "' property. Found: " + sPropertyValue);
         }
         return Boolean.parseBoolean(sPropertyValue);
+    }
+
+
+    /**
+     * Returns a list containing Database URL, Username and Password, based on the environment provided in the parameter.
+     *
+     * @param sEnvironment environment to get the data for
+     * @return List<String> containing Database URL, Username and Password
+     */
+    public static List<String> getDatabaseParameters(String sEnvironment) {
+        List<String> parameterList = new ArrayList<>();
+        switch (sEnvironment) {
+            case "local" -> {
+                parameterList.add(properties.getProperty("localDatabaseUrl"));
+                parameterList.add(properties.getProperty("localDatabaseUser"));
+                parameterList.add(properties.getProperty("localDatabasePass"));
+            }
+            case "test" -> {
+                parameterList.add(properties.getProperty("testDatabaseUrl"));
+                parameterList.add(properties.getProperty("testDatabaseUser"));
+                parameterList.add(properties.getProperty("testDatabasePass"));
+            }
+            case "stage" -> {
+                parameterList.add(properties.getProperty("stageDatabaseUrl"));
+                parameterList.add(properties.getProperty("stageDatabaseUser"));
+                parameterList.add(properties.getProperty("stageDatabasePass"));
+            }
+            case "prod" -> {
+                parameterList.add(properties.getProperty("prodDatabaseUrl"));
+                parameterList.add(properties.getProperty("prodDatabaseUser"));
+                parameterList.add(properties.getProperty("prodDatabasePass"));
+            }
+            default -> Assert.fail("Invalid environment " + sEnvironment + ", cannot get the database properties!");
+        }
+        return parameterList;
     }
 }
