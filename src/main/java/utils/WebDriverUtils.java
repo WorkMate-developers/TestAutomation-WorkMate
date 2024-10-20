@@ -7,6 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
 
 public class WebDriverUtils extends LoggerUtils {
@@ -61,9 +63,23 @@ public class WebDriverUtils extends LoggerUtils {
         return driver;
     }
 
+    private static SessionId getSessionID(WebDriver driver) {
+        return ((RemoteWebDriver) driver).getSessionId();
+    }
+
+    public static Boolean hasDriverQuit(WebDriver driver) {
+        if (driver != null) {
+            return getSessionID(driver) == null;
+        } else {
+            return true;
+        }
+    }
+
     public static void quitDriver(WebDriver driver) {
         log.debug("Quitting driver. Bye!");
-        driver.quit();
+        if (!hasDriverQuit(driver)) {
+            driver.quit();
+        }
     }
 
 }
