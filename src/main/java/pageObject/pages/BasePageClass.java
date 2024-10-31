@@ -69,6 +69,12 @@ public class BasePageClass extends LoggerUtils {
 
     // Methods for interaction with elements
 
+    protected void clickWebElement(WebElement element) {
+        log.trace("clickWebElement(" + element + ")");
+        waitForWebElementToBeClickable(element, 5); // todo: replace time with constant when the time.class is created
+        element.click();
+    }
+
 
     // Wait methods
 
