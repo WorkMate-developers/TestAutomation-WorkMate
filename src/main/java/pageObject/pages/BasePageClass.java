@@ -1,5 +1,6 @@
 package pageObject.pages;
 
+import data.Time;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,8 +71,14 @@ public class BasePageClass extends LoggerUtils {
     // Methods for interaction with elements
 
     protected void clickWebElement(WebElement element) {
-        log.trace("clickWebElement(" + element + ")");
-        waitForWebElementToBeClickable(element, 5); // todo: replace time with constant when the time.class is created
+        log.trace("clickWebElement(" + element.getTagName() + " with timeout: " + Time.TIME_SHORT);
+        waitForWebElementToBeClickable(element, Time.TIME_SHORT);
+        element.click();
+    }
+
+    protected void clickWebElement(WebElement element, int timeout) {
+        log.trace("clickWebElement(" + element.getTagName() + " with timeout: " + timeout);
+        waitForWebElementToBeClickable(element, timeout);
         element.click();
     }
 

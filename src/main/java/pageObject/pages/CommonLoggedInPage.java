@@ -1,8 +1,9 @@
 package pageObject.pages;
 
-import data.Time;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import pageObject.pages.countries.CountriesPage;
 
 /**
  * This class contains the elements that are common to all pages when the user is logged in.
@@ -11,38 +12,67 @@ import org.openqa.selenium.WebDriver;
 public abstract class CommonLoggedInPage extends BasePageClass {
 
     // Locators
-    private final By homeTabLocator = By.xpath("//a[@href='#/']");
-    private final By aboutTabLocator = By.xpath("//a[@href='#/about']");
-    private final By dataTabLocator = null;
-    private final By countriesTabLocator = null;
-    private final By citiesTabLocator = null;
-    private final By suppliersTabLocator = null;
+
+    @FindBy(xpath = "//a[@href='#/']")
+    private WebElement homeTab;
+
+    @FindBy(xpath = "//a[@href='#/about']")
+    private WebElement aboutTab;
+
+    @FindBy(xpath = "//a[@href='#/simple_api/data']")
+    private WebElement dataTab;
+
+    @FindBy(xpath = "//a[@href='#/api/countries']")
+    private WebElement countriesTab;
+
+    @FindBy(xpath = "//a[@href='#/api/cities']")
+    private WebElement citiesTab;
+
+    @FindBy(xpath = "//a[@href='#/api/suppliers']")
+    private WebElement suppliersTab;
 
     // Constructor(s)
     public CommonLoggedInPage(WebDriver driver) {
         super(driver);
     }
 
-    // Methods to access pages
+
+    // Methods to access different pages from the common logged in page
 
     public HomePage clickHomeTab() {
         log.debug("clickHomeTab()");
-        clickWebElement(getWebElement(homeTabLocator, Time.TIME_SHORT));
+        clickWebElement(homeTab);
         return new HomePage(driver);
     }
 
     public AboutPage clickAboutTab() {
         log.debug("clickAboutTab()");
-        clickWebElement(getWebElement(aboutTabLocator, Time.TIME_SHORT));
+        clickWebElement(aboutTab);
         return new AboutPage(driver);
     }
 
-    // ToDo: Data Page
+    public DataPage clickDataTab() {
+        log.debug("clickDataTab()");
+        clickWebElement(dataTab);
+        return new DataPage(driver);
+    }
 
-    // ToDo: Countries Page
+    public CountriesPage clickCountriesTab() {
+        log.debug("clickCountriesPage()");
+        clickWebElement(countriesTab);
+        return new CountriesPage(driver);
+    }
 
-    // ToDo: Cities Page
+    public CitiesPage clickCitiesTab() {
+        log.debug("clickCitiesTab()");
+        clickWebElement(citiesTab);
+        return new CitiesPage(driver);
+    }
 
-    // ToDo: Suppliers Page
+    public SuppliersPage clickSuppliersTab() {
+        log.debug("clickSuppliersTab()");
+        clickWebElement(suppliersTab);
+        return new SuppliersPage(driver);
+    }
 
 }
