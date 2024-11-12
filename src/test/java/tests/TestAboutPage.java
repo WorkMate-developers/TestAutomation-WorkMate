@@ -1,6 +1,7 @@
 package tests;
 
 import data.CommonStrings;
+import data.Groups;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 import pageObject.pages.AboutPage;
 import pageObject.pages.HomePage;
 
+@Test(groups = {Groups.REGRESSION, Groups.SMOKE, Groups.UI}, testName = "About Page basic UI test")
 public class TestAboutPage extends BaseTestClass{
 
     private WebDriver driver;
