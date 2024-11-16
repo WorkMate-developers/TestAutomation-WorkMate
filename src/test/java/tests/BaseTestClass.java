@@ -1,6 +1,7 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import utils.LoggerUtils;
 import utils.WebDriverUtils;
 
@@ -16,5 +17,20 @@ public abstract class BaseTestClass extends LoggerUtils {
 
     protected void quitDriver(WebDriver driver) {
         WebDriverUtils.quitDriver(driver);
+    }
+
+    protected void tearDown(WebDriver driver, ITestResult testResult) {
+        String sTestName = testResult.getTestName();
+
+        try {
+            if(testResult.getStatus() == ITestResult.FAILURE) {
+                // TODO: add screenshot logic here
+            }
+        } catch (AssertionError | Exception e) {
+            LoggerUtils.log.debug("Exception occurred in tearDown(" + sTestName + ")! Message: " + e.getMessage());
+        }
+        finally {
+            quitDriver(driver);
+        }
     }
 }

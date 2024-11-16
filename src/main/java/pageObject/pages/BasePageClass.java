@@ -68,6 +68,13 @@ public class BasePageClass extends LoggerUtils {
         return element.findElements(locator);
     }
 
+    // Methods for getting data from elements
+
+    protected String getTextFromWebElement(WebElement element) {
+        log.trace("getTextFromWebElement(" + element.getAccessibleName() + ")");
+        return element.getText();
+    }
+
     // Methods for interaction with elements
 
     protected void clickWebElement(WebElement element) {
