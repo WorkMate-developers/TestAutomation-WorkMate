@@ -29,7 +29,7 @@ public class BasePageClass extends LoggerUtils {
     }
 
     protected void openUrl(String sUrl) {
-        log.debug("Open URL: " + sUrl);
+        log.trace("Open URL: " + sUrl);
         driver.get(sUrl);
     }
 
@@ -71,8 +71,13 @@ public class BasePageClass extends LoggerUtils {
     // Methods for getting data from elements
 
     protected String getTextFromWebElement(WebElement element) {
-        log.trace("getTextFromWebElement(" + element.getAccessibleName() + ")");
+        log.trace("getTextFromWebElement(" + element + ")");
         return element.getText();
+    }
+
+    protected String getWebElementAttribute(WebElement element, String sAttribute) {
+        log.trace("getWebElementAttribute(" + element + ", " + sAttribute);
+        return element.getAttribute(sAttribute);
     }
 
     // Methods for interaction with elements
