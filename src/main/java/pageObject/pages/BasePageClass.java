@@ -94,6 +94,11 @@ public class BasePageClass extends LoggerUtils {
         element.click();
     }
 
+    protected void enterTextInElement(WebElement element, String sText) {
+        log.trace("enterTextInElement({}, {})", element, sText);
+        element.sendKeys(sText);
+    }
+
 
     // Wait methods
 

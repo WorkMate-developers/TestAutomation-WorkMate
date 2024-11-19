@@ -6,9 +6,14 @@ import org.openqa.selenium.support.FindBy;
 import pageObject.pages.BasePageClass;
 
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 public class AddNewCountryPage extends BasePageClass {
+
+    public AddNewCountryPage(WebDriver driver) {
+        super(driver);
+        addElementsToMap();
+        log.trace("new Add New Country Page");
+    }
 
     private static final HashMap<String, WebElement> elementsMap = new HashMap<>();
     private final String pageName = "Add New Country page";
@@ -43,12 +48,6 @@ public class AddNewCountryPage extends BasePageClass {
 
     // Element maps
 
-    public AddNewCountryPage(WebDriver driver) {
-        super(driver);
-        addElementsToMap();
-        log.trace("new Add New Country Page");
-    }
-
     private void addElementsToMap() {
         elementsMap.put("Page Title", pageTitle);
         elementsMap.put("Country Name Title", countryNameTitle);
@@ -62,6 +61,21 @@ public class AddNewCountryPage extends BasePageClass {
     }
 
     //Methods
+
+    /**
+     * Gets text from the element specified in the parameter. Available elements are:
+     *  - Page Title
+     *  - Country Name Title
+     *  - Country Name Input Placeholder
+     *  - Country Code Title
+     *  - Country Code Input Placeholder
+     *  - Back Button
+     *  - Create Country Button
+     *  - Country Name Error Message
+     *  - Country Code Error Message
+     * @param sKey String - the element we wish to get the text for
+     * @return String - element text
+     */
 
     public String getTextFromElement(String sKey) {
             log.debug("Get text from element: " + sKey + " on page: " + pageName);
@@ -85,8 +99,8 @@ public class AddNewCountryPage extends BasePageClass {
     }
 
     public void enterTextIntoField(String sKey, String sText) {
-        log.debug("Entering text: '" + sText + "' into the " + sKey + " field");
-        // TODO: add methods when they are available in BasePageClass
+        log.debug("Entering text: '{}' into the {} field", sText, sKey);
+        enterTextInElement(elementsMap.get(sKey), sText);
     }
 
 }
