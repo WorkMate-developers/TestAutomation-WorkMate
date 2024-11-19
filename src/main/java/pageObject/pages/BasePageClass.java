@@ -71,12 +71,12 @@ public class BasePageClass extends LoggerUtils {
     // Methods for getting data from elements
 
     protected String getTextFromWebElement(WebElement element) {
-        log.trace("getTextFromWebElement(" + element + ")");
+        log.trace("getTextFromWebElement({})", element);
         return element.getText();
     }
 
     protected String getWebElementAttribute(WebElement element, String sAttribute) {
-        log.trace("getWebElementAttribute(" + element + ", " + sAttribute);
+        log.trace("getWebElementAttribute({}, {}", element, sAttribute);
         return element.getAttribute(sAttribute);
     }
 
@@ -97,6 +97,32 @@ public class BasePageClass extends LoggerUtils {
     protected void enterTextInElement(WebElement element, String sText) {
         log.trace("enterTextInElement({}, {})", element, sText);
         element.sendKeys(sText);
+    }
+
+    protected void clearTextInput(WebElement element) {
+        log.trace("clearTextInput({})", element);
+        element.clear();
+    }
+
+    // Element presence methods
+    protected Boolean isWebElementVisible(WebElement element) {
+        try {
+            log.trace("isWebElementVisible({})", element);
+            WebElement webElement = waitForWebElementToBeVisible(element, Time.TIME_SHORT);
+            return webElement != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected Boolean isWebElementVisible(WebElement element, int iWaitTime) {
+        try {
+            log.trace("isWebElementVisible({}, {})", element, iWaitTime);
+            WebElement webElement = waitForWebElementToBeVisible(element, iWaitTime);
+            return webElement != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

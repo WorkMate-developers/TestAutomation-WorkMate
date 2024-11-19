@@ -37,9 +37,9 @@ public class TestAddCountryPageUI extends BaseTestClass {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Page Title"), CommonStrings.CREATE_NEW_COUNTRY_PAGE_TITLE);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Name Title"), CommonStrings.COUNTRY_NAME_TEXT);
-        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Name Input Placeholder"), CommonStrings.COUNTRY_NAME_TEXT_BOX_PLACEHOLDER_TEXT);
+        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Name Input"), CommonStrings.COUNTRY_NAME_TEXT_BOX_PLACEHOLDER_TEXT);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Title"), CommonStrings.COUNTRY_CODE_TEXT);
-        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Input Placeholder"), CommonStrings.COUNTRY_CODE_TEXT_BOX_PLACEHOLDER_TEXT);
+        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Input"), CommonStrings.COUNTRY_CODE_TEXT_BOX_PLACEHOLDER_TEXT);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Back Button"), CommonStrings.BACK_BUTTON_TEXT);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Create Country Button"), CommonStrings.CREATE_COUNTRY_BUTTON_TEXT);
         softAssert.assertAll();

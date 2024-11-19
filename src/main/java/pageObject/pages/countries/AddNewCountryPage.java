@@ -51,9 +51,9 @@ public class AddNewCountryPage extends BasePageClass {
     private void addElementsToMap() {
         elementsMap.put("Page Title", pageTitle);
         elementsMap.put("Country Name Title", countryNameTitle);
-        elementsMap.put("Country Name Input Placeholder", countryNameInput);
+        elementsMap.put("Country Name Input", countryNameInput);
         elementsMap.put("Country Code Title", countryCodeTitle);
-        elementsMap.put("Country Code Input Placeholder", countryCodeInput);
+        elementsMap.put("Country Code Input", countryCodeInput);
         elementsMap.put("Back Button", backButton);
         elementsMap.put("Create Country Button", createCountryButton);
         elementsMap.put("Country Name Error Message", countryNameErrorMessage);
@@ -78,11 +78,16 @@ public class AddNewCountryPage extends BasePageClass {
      */
 
     public String getTextFromElement(String sKey) {
-            log.debug("Get text from element: " + sKey + " on page: " + pageName);
+        log.debug("Get text from element: {} on page: " + pageName, sKey);
             if (sKey.contains("Placeholder")) {
                 return getWebElementAttribute(elementsMap.get(sKey), "placeholder");
             }
             return getTextFromWebElement(elementsMap.get(sKey));
+    }
+
+    public Boolean isElementVisible(String sKey) {
+        log.debug("Check if element: {} is visible on page: {}", sKey, pageName);
+        return isWebElementVisible(elementsMap.get(sKey));
     }
 
     // Interactions
@@ -99,8 +104,12 @@ public class AddNewCountryPage extends BasePageClass {
     }
 
     public void enterTextIntoField(String sKey, String sText) {
-        log.debug("Entering text: '{}' into the {} field", sText, sKey);
+        log.debug("Entering text: '{}' into the {} field on page {}", sText, sKey, pageName);
         enterTextInElement(elementsMap.get(sKey), sText);
     }
 
+    public void clearTextField(String sKey) {
+        log.debug("Clearing the text field: {} on page {}", sKey, pageName);
+        clearTextInput(elementsMap.get(sKey));
+    }
 }
