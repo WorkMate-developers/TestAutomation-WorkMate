@@ -22,13 +22,13 @@ public class TestAddCountryPageUI extends BaseTestClass {
 
     @BeforeMethod
     public void setUpTest(ITestContext testContext) {
-        log.debug("[SETUP TEST] " + testName);
+        log.debug("[SETUP TEST] {}", testName);
         driver = setUpDriver();
     }
 
     @Test
     public void testAddNewCountryPageUI() {
-        log.debug("[START TEST] " + testName);
+        log.debug("[START TEST] {}", testName);
 
         HomePage homePage = new HomePage(driver).open();
         CountriesPage countriesPage = homePage.clickCountriesTab();
@@ -47,7 +47,7 @@ public class TestAddCountryPageUI extends BaseTestClass {
 
     @AfterMethod(alwaysRun = true)
     public void cleanupTest(ITestResult testResult) {
-        log.debug("[CLEANUP TEST] " + testName);
+        log.debug("[CLEANUP TEST] {}", testName);
         tearDown(driver, testResult);
     }
 }
