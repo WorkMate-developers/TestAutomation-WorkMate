@@ -32,6 +32,7 @@ public class TestAddCountryPageUI extends BaseTestClass {
 
         HomePage homePage = new HomePage(driver).open();
         CountriesPage countriesPage = homePage.clickCountriesTab();
+        boolean isCountriesTabActive = homePage.isTabActive("Countries");
         AddNewCountryPage addNewCountryPage = countriesPage.clickOnAddNewCountryButton();
 
         SoftAssert softAssert = new SoftAssert();
@@ -42,6 +43,7 @@ public class TestAddCountryPageUI extends BaseTestClass {
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Input"), CommonStrings.COUNTRY_CODE_TEXT_BOX_PLACEHOLDER_TEXT);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Back Button"), CommonStrings.BACK_BUTTON_TEXT);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Create Country Button"), CommonStrings.CREATE_COUNTRY_BUTTON_TEXT);
+        softAssert.assertTrue(isCountriesTabActive);
         softAssert.assertAll();
     }
 

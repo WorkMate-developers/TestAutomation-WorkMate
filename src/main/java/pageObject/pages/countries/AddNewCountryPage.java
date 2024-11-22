@@ -66,9 +66,9 @@ public class AddNewCountryPage extends BasePageClass {
      * Gets text from the element specified in the parameter. Available elements are:
      *  - Page Title
      *  - Country Name Title
-     *  - Country Name Input Placeholder
+     *  - Country Name Input
      *  - Country Code Title
-     *  - Country Code Input Placeholder
+     *  - Country Code Input
      *  - Back Button
      *  - Create Country Button
      *  - Country Name Error Message
@@ -79,7 +79,7 @@ public class AddNewCountryPage extends BasePageClass {
 
     public String getTextFromElement(String sKey) {
         log.debug("Get text from element: {} on page: " + pageName, sKey);
-            if (sKey.contains("Placeholder")) {
+            if (sKey.contains("Input")) {
                 return getWebElementAttribute(elementsMap.get(sKey), "placeholder");
             }
             return getTextFromWebElement(elementsMap.get(sKey));

@@ -2,22 +2,15 @@ package pageObject.pages.countries;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pageObject.pages.CommonLoggedInPage;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class CountriesPage extends CommonLoggedInPage {
 
-    public CountriesPage(WebDriver driver) {
-        super(driver);
-        addElementsToMap();
-        log.trace("new Countries Page");
-    }
-
+    private static final HashMap<String, WebElement> elementsMap = new HashMap<>();
     private final String pageName = "Add New Country page";
 
     // Locators
@@ -34,7 +27,11 @@ public class CountriesPage extends CommonLoggedInPage {
 
     // Element maps
 
-    private static final HashMap<String, WebElement> elementsMap = new HashMap<>();
+    public CountriesPage(WebDriver driver) {
+        super(driver);
+        addElementsToMap();
+        log.trace("new Countries Page");
+    }
 
     private void addElementsToMap() {
         elementsMap.put("Page Title", pageTitle);
@@ -44,19 +41,12 @@ public class CountriesPage extends CommonLoggedInPage {
     // Methods
 
     public String getTextFromElement(String key) {
-        try {
-            log.debug("Get text from element: " + key + " on page: " + pageName);
-            return getTextFromWebElement(elementsMap.get(key));
-        }
-        catch (NoSuchElementException e) {
-            log.error("Element " + key + " not defined on this page! Check the testing code.");
-            assert false;
-        }
-        return null;
+        log.debug("Get text from element: " + key + " on page: " + pageName);
+        return getTextFromWebElement(elementsMap.get(key));
     }
 
     public AddNewCountryPage clickOnAddNewCountryButton() {
-        log.debug("Click on Add New bountry Button -> open new Add New Country page");
+        log.debug("Click on Add New Country Button -> open new Add New Country page");
         clickWebElement(addNewCountryButton);
         return new AddNewCountryPage(driver);
     }

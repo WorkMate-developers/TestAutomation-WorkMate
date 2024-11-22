@@ -75,4 +75,30 @@ public abstract class CommonLoggedInPage extends BasePageClass {
         return new SuppliersPage(driver);
     }
 
+    public boolean isTabActive(String sTab) {
+        log.debug("isTabActive({})", sTab);
+        String parameter = "";
+        switch (sTab){
+            case "Home" -> {
+                parameter = homeTab.getAttribute("class");
+            }
+            case "About" -> {
+                parameter = aboutTab.getAttribute("class");
+            }
+            case "Data" -> {
+                parameter = dataTab.getAttribute("class");
+            }
+            case "Countries" -> {
+                parameter = countriesTab.getAttribute("class");
+            }
+            case "Cities" -> {
+                parameter = citiesTab.getAttribute("class");
+            }
+            case "Suppliers" -> {
+                parameter = suppliersTab.getAttribute("class");
+            }
+        }
+        return parameter.contains("router-link-active");
+    }
+
 }

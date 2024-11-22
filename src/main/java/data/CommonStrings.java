@@ -15,5 +15,6 @@ public final class CommonStrings {
     public static final String COUNTRY_CODE_TEXT_BOX_PLACEHOLDER_TEXT = "Enter country code";
     public static final String COUNTRY_CODE_ERROR_MESSAGE = "Country code is required";
     public static final String CREATE_COUNTRY_BUTTON_TEXT = "Create Country";
+    public static final String THIS_FIELD_IS_REQUIRED_TEXT = "This field is required";
 
 }
