@@ -3,6 +3,8 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import utils.LoggerUtils;
+import utils.PropertiesUtils;
+import utils.ScreenShotUtils;
 import utils.WebDriverUtils;
 
 /**
@@ -21,10 +23,10 @@ public abstract class BaseTestClass extends LoggerUtils {
 
     protected void tearDown(WebDriver driver, ITestResult testResult) {
         String sTestName = testResult.getTestName();
-
+        String sFileName = sTestName + "_" + testResult.getEndMillis();
         try {
-            if(testResult.getStatus() == ITestResult.FAILURE) {
-                // TODO: add screenshot logic here
+            if(testResult.getStatus() == ITestResult.FAILURE && PropertiesUtils.getBoolProperty("takeScreenshot")) {
+                ScreenShotUtils.takeScreenShot(driver, sFileName);
             }
         } catch (AssertionError | Exception e) {
             LoggerUtils.log.debug("Exception occurred in tearDown(" + sTestName + ")! Message: " + e.getMessage());
