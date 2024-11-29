@@ -29,7 +29,7 @@ public class BasePageClass extends LoggerUtils {
     }
 
     protected void openUrl(String sUrl) {
-        log.trace("Open URL: " + sUrl);
+        log.trace("Open URL: {}", sUrl);
         driver.get(sUrl);
     }
 
@@ -37,34 +37,34 @@ public class BasePageClass extends LoggerUtils {
     // Methods for getting elements
 
     protected WebElement getWebElement(By locator) {
-        log.trace("getWebElement(" + locator + ")");
+        log.trace("getWebElement({})", locator);
         return driver.findElement(locator);
     }
 
     protected WebElement getWebElement(By locator, int timeout) {
-        log.trace("getWebElement(" + locator + ", " + timeout + ")");
+        log.trace("getWebElement({}, {})", locator, timeout);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     protected WebElement getNestedWebElement(WebElement element, By locator) {
-        log.trace("getNestedWebElement(" + element + ", " + locator + ")");
+        log.trace("getNestedWebElement({}, {})", element, locator);
         return element.findElement(locator);
     }
 
     protected WebElement getNestedWebElement(WebElement element, By locator, int timeout) {
-        log.trace("getNestedWebElement(" + element + ", " + locator + ", " + timeout + ")");
+        log.trace("getNestedWebElement({}, {}, {})", element, locator, timeout);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, locator));
     }
 
     protected List<WebElement> getWebElements(By locator) {
-        log.trace("getWebElements(" + locator + ")");
+        log.trace("getWebElements({})", locator);
         return driver.findElements(locator);
     }
 
     protected List<WebElement> getNestedWebElements(WebElement element, By locator) {
-        log.trace("getWebElements(" + element + ", " + locator + ")");
+        log.trace("getWebElements({}, {})", element, locator);
         return element.findElements(locator);
     }
 
@@ -83,13 +83,13 @@ public class BasePageClass extends LoggerUtils {
     // Methods for interaction with elements
 
     protected void clickWebElement(WebElement element) {
-        log.trace("clickWebElement(" + element.getTagName() + " with timeout: " + Time.TIME_SHORT);
+        log.trace("clickWebElement(" + element + " with timeout: " + Time.TIME_SHORT);
         waitForWebElementToBeClickable(element, Time.TIME_SHORT);
         element.click();
     }
 
     protected void clickWebElement(WebElement element, int timeout) {
-        log.trace("clickWebElement(" + element.getTagName() + " with timeout: " + timeout);
+        log.trace("clickWebElement(" + element + " with timeout: " + timeout);
         waitForWebElementToBeClickable(element, timeout);
         element.click();
     }
