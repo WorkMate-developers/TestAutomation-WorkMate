@@ -2,6 +2,7 @@ package pageObject.pages;
 
 import data.Time;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -101,8 +102,11 @@ public class BasePageClass extends LoggerUtils {
 
     protected void clearTextInput(WebElement element) {
         log.trace("clearTextInput({})", element);
-        element.clear();
-    }
+//        element.clear();
+        int currentTextLength = element.getText().length();
+        for (int i = 0; i < currentTextLength; i++)
+            element.sendKeys(Keys.BACK_SPACE);
+        }
 
     // Element presence methods
     protected Boolean isWebElementVisible(WebElement element) {

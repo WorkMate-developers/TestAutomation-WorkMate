@@ -79,10 +79,13 @@ public class AddNewCountryPage extends BasePageClass {
 
     public String getTextFromElement(String sKey) {
         log.debug("Get text from element: {} on page: " + pageName, sKey);
-            if (sKey.contains("Input")) {
-                return getWebElementAttribute(elementsMap.get(sKey), "placeholder");
-            }
-            return getTextFromWebElement(elementsMap.get(sKey));
+        if (!isElementVisible(sKey)) {
+            return "[ERROR] Element '" + sKey + "' is not visible!";
+        }
+        if (sKey.contains("Input")) {
+            return getWebElementAttribute(elementsMap.get(sKey), "placeholder");
+        }
+        return getTextFromWebElement(elementsMap.get(sKey));
     }
 
     public Boolean isElementVisible(String sKey) {

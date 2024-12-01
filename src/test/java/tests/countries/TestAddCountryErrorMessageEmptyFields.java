@@ -22,7 +22,7 @@ import tests.BaseTestClass;
  */
 
 @Test(groups = {Groups.REGRESSION, Groups.SMOKE, Groups.UI}, testName = "Add New Country Page error messages")
-public class TestAddCountryErrorMessages extends BaseTestClass {
+public class TestAddCountryErrorMessageEmptyFields extends BaseTestClass {
 
     private final String testName = this.getClass().getName();
     private WebDriver driver;
@@ -34,7 +34,7 @@ public class TestAddCountryErrorMessages extends BaseTestClass {
     }
 
     @Test
-    public void testAddCountryErrorMessages() {
+    public void testAddCountryErrorMessageEmptyFields() {
         log.debug("[START TEST] {}", testName);
 
         HomePage homePage = new HomePage(driver).open();
@@ -46,17 +46,6 @@ public class TestAddCountryErrorMessages extends BaseTestClass {
         addNewCountryPage.clickCreateCountryButton();
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Name Error Message"), CommonStrings.COUNTRY_NAME_ERROR_MESSAGE);
         softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Error Message"), CommonStrings.COUNTRY_CODE_ERROR_MESSAGE);
-
-        addNewCountryPage.enterTextIntoField("Country Name Input", "Sample country");
-        addNewCountryPage.clickCreateCountryButton();
-        softAssert.assertFalse(addNewCountryPage.isElementVisible("Country Name Error Message"));
-        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Code Error Message"), CommonStrings.COUNTRY_CODE_ERROR_MESSAGE);
-
-        addNewCountryPage.clearTextField("Country Name Input");
-        addNewCountryPage.enterTextIntoField("Country Code Input", "Sample country code");
-        addNewCountryPage.clickCreateCountryButton();
-        softAssert.assertFalse(addNewCountryPage.isElementVisible("Country Code Error Message"));
-        softAssert.assertEquals(addNewCountryPage.getTextFromElement("Country Name Error Message"), CommonStrings.COUNTRY_NAME_ERROR_MESSAGE);
 
         softAssert.assertAll();
     }
