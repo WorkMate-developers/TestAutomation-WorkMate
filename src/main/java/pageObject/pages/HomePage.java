@@ -41,15 +41,16 @@ public class HomePage extends CommonLoggedInPage {
         return this;
     }
 
-    protected String getCardText(WebElement cardElement, String whatToGet) {
-        log.debug("Getting title text for {} card", cardElement);
+    public String getCardText(String requestedCard, String whatToGet) {
+        log.debug("Getting title text for {} card", requestedCard);
         String[] fullText;
+        WebElement cardElement = getSpecificCardElement(requestedCard);
         fullText = prepareCardText(cardElement);
-        if(!whatToGet.equals("title") && !whatToGet.equals("text")) {
+        if(!whatToGet.equalsIgnoreCase("title") && !whatToGet.equalsIgnoreCase("text")) {
             Assert.fail("Invalid request for card element");
             return null;
         }
-        if(fullText != null && whatToGet.equals("title")) {
+        if(fullText != null && whatToGet.equalsIgnoreCase("title")) {
             return fullText[0];
         } else if (fullText != null) {
             return fullText[1];
@@ -59,7 +60,7 @@ public class HomePage extends CommonLoggedInPage {
         }
     }
 
-    protected void clickCard(String requestedCard) {
+    public void clickCard(String requestedCard) {
         log.debug("Clicking on {} card", requestedCard);
         WebElement cardElement = getSpecificCardElement(requestedCard);
         clickWebElement(cardElement);
